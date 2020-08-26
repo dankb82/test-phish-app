@@ -1,5 +1,5 @@
 const request = require("postman-request");
-
+require("dotenv").config();
 const jamchartFilter = require("../utils/jamchartFilter");
 const url = ` http://phish.in/api/v1/years/1997.json`;
 const options = {
@@ -7,7 +7,7 @@ const options = {
   json: true,
   headers: {
     Accept: "application/json",
-    Authorization: `Bearer ${PHISHIN_API_KEY}`,
+    Authorization: `Bearer ${process.env.PHISHIN_API_KEY}`,
   },
 };
 
