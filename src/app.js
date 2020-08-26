@@ -7,8 +7,21 @@ const jamchartFilter = require("../utils/jamchartFilter");
 
 const app = express();
 
+// Define paths for Express config
+const PUBLIC_DIRECTORY_PATH = path.join(__dirname, "../public");
+const viewsPath = path.join(__dirname, "../templates/views");
+const partialsPath = path.join(__dirname, "../templates/partials");
+
+// Setup Handlebars engine and views location
+app.set("view engine", "hbs");
+app.set("views", viewsPath);
+hbs.registerPartials(partialsPath);
+
+// Setup static directory to serve
+app.use(express.static(PUBLIC_DIRECTORY_PATH));
+
 app.get("/", (req, res) => {
-  res.send("Welcome to the Phish app!");
+  res.render("index");
 });
 
 const url = ` http://phish.in/api/v1/years/1997.json`;
