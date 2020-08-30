@@ -2,8 +2,6 @@ const request = require("postman-request");
 const path = require("path");
 const express = require("express");
 const hbs = require("hbs");
-require("dotenv").config();
-const jamchartFilter = require("../utils/jamchartFilter");
 
 const app = express();
 
@@ -42,8 +40,6 @@ request(options, (error, { body }) => {
       allTracks.push(track);
     });
   });
-
-  const jamchartVersions = jamchartFilter(allTracks);
 });
 
 app.listen(3000, () => {
