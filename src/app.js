@@ -18,11 +18,8 @@ hbs.registerPartials(partialsPath);
 // Setup static directory to serve
 app.use(express.static(PUBLIC_DIRECTORY_PATH));
 
-app.get("/", (req, res) => {
-  res.render("index");
-});
+const url = `http://phish.in/api/v1/random-show`;
 
-const url = ` http://phish.in/api/v1/years/1997.json`;
 const options = {
   url,
   json: true,
@@ -32,12 +29,15 @@ const options = {
   },
 };
 
-request(options, (error, { body }) => {
-  // Build an array of all the tracks from a given year.
-  let allTracks = [];
-  body.data.forEach((show) => {
-    show.tracks.forEach((track) => {
-      allTracks.push(track);
+app.get("", (req, res) => {
+  request(options, (error, { body }) => {
+    const date = body.data.date;
+    const venue = body.data.venue.name;
+    const location = body.data.venue.location;
+    res.render("index", {
+      date,
+      venue,
+      location,
     });
   });
 });
