@@ -1,7 +1,7 @@
-const axios = require("axios");
 const path = require("path");
 const express = require("express");
 const hbs = require("hbs");
+const randomShow = require("./managers/randomShow");
 
 const app = express();
 
@@ -18,41 +18,9 @@ hbs.registerPartials(partialsPath);
 // Setup static directory to serve
 app.use(express.static(PUBLIC_DIRECTORY_PATH));
 
-const url = `http://phish.in/api/v1/random-show`;
-
-const randomShowRequest = async () => {
-  return axios.get(url, {
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${process.env.PHISHIN_API_KEY}`,
-    },
-  });
-};
-
 app.get("", async (req, res) => {
-  try {
-    /*
-    Destructuring API response several levels deep for now to pull out the nested values. 
-    This is initially to avoid having to dig too deeply into a heavily nested object more than once, 
-    but it may prove to be an unnecessary readability tradeoff. 
-    */
-    const {
-      data: {
-        data: { date },
-      },
-      data: {
-        data: { venue },
-      },
-    } = await randomShowRequest();
-    const responseBody = {
-      date,
-      venue: venue.name,
-      location: venue.location,
-    };
-    res.render("index", responseBody);
-  } catch (e) {
-    console.log(e.stack);
-  }
+  // Calling the randomShow manager directly in the render instead of setting to variable first. This may beed to be refactored
+  res.render("index", await randomShow());
 });
 
 app.listen(3000, () => {
