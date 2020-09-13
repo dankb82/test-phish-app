@@ -7,4 +7,4 @@ This app started as a practice app to work on alongside a node course. It has si
 - [] Random show is playable via an online audio streamer
 - [] Basic tests have been included
 
-Once those benchmarks are met, the POC will be moved into another repo, given a proper name, and built out to be production ready
+Once those benchmarks are met, the POC will be moved into another repo, given a proper name, and built out to be "production" ready
