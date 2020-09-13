@@ -15,6 +15,9 @@ const randomShow = async () => {
       data: {
         data: { venue },
       },
+      data: {
+        data: { tracks },
+      },
     } = await axios.get(url, {
       headers: {
         Accept: "application/json",
@@ -25,6 +28,8 @@ const randomShow = async () => {
       date,
       venue: venue.name,
       location: venue.location,
+      trackName: tracks[0].title,
+      mp3Link: tracks[0].mp3,
     };
     return responseBody;
   } catch (e) {

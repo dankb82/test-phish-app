@@ -2,6 +2,7 @@ const path = require("path");
 const express = require("express");
 const hbs = require("hbs");
 const randomShow = require("./managers/randomShow");
+const mp3 = require("./managers/getMP3");
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(express.static(PUBLIC_DIRECTORY_PATH));
 
 app.get("", async (req, res) => {
   // Calling the randomShow manager directly in the render instead of setting to variable first. This may beed to be refactored
+  console.log(res.mp3Link);
   res.render("index", await randomShow());
 });
 
