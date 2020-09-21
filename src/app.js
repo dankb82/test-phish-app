@@ -2,7 +2,6 @@ const path = require("path");
 const express = require("express");
 const hbs = require("hbs");
 const randomShow = require("./managers/randomShow");
-const mp3 = require("./managers/getMP3");
 
 const app = express();
 
